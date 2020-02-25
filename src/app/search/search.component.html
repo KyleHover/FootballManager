@@ -1,0 +1,45 @@
+<div class='mx-auto'>
+  <h1 class='text-center'>Fantasy Football App</h1>
+
+  <div class='mx-auto px-2 py-2 w-75'>
+    <h2 class='text-center'>Game Search</h2>
+
+    <form #form='ngForm' (ngSubmit)='submitQuery(form.value)'>
+      <div class='form-group'>
+        <label for='inputDate'>Date</label>
+        <input type='date' name='date' ngModel class='form-control' id='inputDate' aria-describedby='inputDate'>
+      </div>
+
+      <div class='form-group'>
+        <label for='inputTeam1'>Team 1</label>
+        <select ngModel name='Team1'>
+          <option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
+        </select>
+      </div>
+
+      <div class='form-group'>
+        <label for='inputTeam2'>Team 2</label>
+        <select ngModel name='Team2'>
+          <option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
+        </select>
+      </div>
+
+      <div class='text-center'>
+        <button type='submit' class='btn btn-primary submit'>Search</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<div *ngIf="games | async; let games; else loading">
+  <ul>
+    <div *ngFor="let game of games">
+      <li>{{ game.Gameid }}</li>
+      <li>{{ game.Opponent }}</li>
+      <li>{{ game.Team }}</li>
+    </div>
+  </ul>
+  <div *ngIf="games.length === 0">No results</div>
+</div>

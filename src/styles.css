@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html,
+body {
+    height: 100%;
+    position: relative;
+}
+
+header {
+    width: 100%;
+}
+
+main {
+    display: block;
+    min-height: 100%;
+    padding-top: 50px;
+}

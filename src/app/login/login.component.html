@@ -1,0 +1,35 @@
+<div class='mx-auto'>
+  <h1 class='text-center'>Fantasy Football App</h1>
+
+  <div class='card login mx-auto'>
+    <div class='mx-auto px-2 py-2 w-75'>
+      <h2 class='text-center'>Login Information</h2>
+
+      <form #form='ngForm' (ngSubmit)='submitLogin(form.value)'>
+        <div class='form-group'>
+          <label for='inputEmail'>Email Address</label>
+          <input type='email' name='email' ngModel class='form-control' id='inputEmail' aria-describedby='emailHelp'>
+        </div>
+
+        <div class='form-group'>
+          <label for='inputPassword'>Password</label>
+          <input type='password' name='password' ngModel class='form-control' id='inputPassword'>
+        </div>
+
+        <div class='form-group form-check'>
+          <input type='checkbox' name='remember' ngModel class='form-check-input' id='rememberCheck'>
+          <label class='form-check-label' for='rememberCheck'>Remember me</label>
+        </div>
+
+        <div class='text-center'>
+          <button type='submit' class='btn btn-primary submit'>Login</button>
+        </div>
+
+      </form>
+
+      <p><a href='#'>Create an account</a></p>
+      <p><a href='#'>Forgot password</a></p>
+      
+    </div>
+  </div>
+</div>

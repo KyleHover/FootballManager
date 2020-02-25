@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDAoS-4BgcRZBKf0u_Fo4K308C-ETJN0hA",
+    authDomain: "football-manager-824d3.firebaseapp.com",
+    databaseURL: "https://football-manager-824d3.firebaseio.com",
+    projectId: "football-manager-824d3",
+    storageBucket: "football-manager-824d3.appspot.com",
+    messagingSenderId: "995170602891",
+    appId: "1:995170602891:web:d8ec99514b6e907b51698e",
+    measurementId: "G-DXLED6QRZ8"
+  }
 };
 
 /*
