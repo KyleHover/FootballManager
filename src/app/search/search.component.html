@@ -34,12 +34,21 @@
 
 
 <div *ngIf="games | async; let games; else loading">
-  <ul>
-    <div *ngFor="let game of games">
-      <li>{{ game.Gameid }}</li>
-      <li>{{ game.Opponent }}</li>
-      <li>{{ game.Team }}</li>
-    </div>
-  </ul>
+  <div *ngFor="let game of games">
+    <p>Game ID: {{ game.Gameid }}</p>
+    <p>Team: {{ game.Team }}</p>
+    <p>Opponent: {{ game.Opponent }}</p>
+    <p>Turnovers: {{ game.Turnovers }}</p>
+    <p>Total Yards: {{ game.TotalYards }}</p>
+    <p>Passing Yards: {{ game.PassingYards }}</p>
+    <p>Running Yards: {{ game.RunningYards }}</p>
+    <p>Penalty Yards: {{ game.PenaltyYards }}</p>
+    <p>Punts: {{ game.punts}}</p>
+    <p>Punt Average: {{ game.PuntAverage }}</p>
+    <p>Punt Yards: {{ game.PuntYards}}</p>
+    <p>Penalties: {{ game.Penalties }}</p>
+    <p>Total First Downs: {{ game.totfd }}</p>
+    <br>
+  </div>
   <div *ngIf="games.length === 0">No results</div>
 </div>

@@ -58,32 +58,15 @@ export class SearchComponent implements OnInit {
     let abbrev2: string = '';
     if (value.Team2 != '') abbrev2 = value.Team2.Abbreviation;
 
-    this.games = this.db.collection('Games', ref => {
-      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-      if (gameId > 0) { query = query.where('Gameid', '>=', gameId).where('Gameid', '<', gameId + 99) };
-      if (abbrev1 != '') { query = query.where('Team', '==', abbrev1) };
-      if (abbrev2 != '') { query = query.where('Opponent', '==', abbrev2) };
-      return query;
-    }).valueChanges();
-    
-    // this.dateFilter.next(gameId);
-    // this.team1Filter.next(abbrev1);
-    // this.team2Filter.next(abbrev2);
-    // this.games = combineLatest(
-    //   this.dateFilter,
-    //   this.team1Filter,
-    //   this.team2Filter
-    // ).pipe(
-    //   switchMap(([date, team1, team2]) =>
-    //     this.db.collection('Games', ref => {
-    //       let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-    //       if (date) { query = query.where('Gameid', '>=', date).where('Gameid', '<', date + 99) };
-    //       if (team1) { query = query.where('Team', '==', team1) };
-    //       if (team2) { query = query.where('Opponent', '==', team2) };
-    //       return query;
-    //     }).valueChanges()
-    //   )
-    // );
+    if (gameId > 0 || abbrev1 != '' || abbrev2 != '') {
+      this.games = this.db.collection('Games', ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        if (gameId > 0) { query = query.where('Gameid', '>=', gameId).where('Gameid', '<', gameId + 99) };
+        if (abbrev1 != '') { query = query.where('Team', '==', abbrev1) };
+        if (abbrev2 != '') { query = query.where('Opponent', '==', abbrev2) };
+        return query;
+      }).valueChanges();
+    }
   }
 
   ngOnInit() {

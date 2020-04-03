@@ -1,0 +1,21 @@
+:host {
+  background-color: #4b3abb;
+  color: white;
+  display: grid;
+  grid-template:
+  '. about     .'
+  '. copyright .'/
+  1fr 7fr 1fr;
+  gap: 1em;
+  min-height: 100%;
+}
+
+:host>div.about {
+  grid-area: about;
+  padding: 0.5em;
+}
+
+:host>div.copyright {
+  grid-area: copyright;
+  padding: 0.5em;
+}

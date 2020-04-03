@@ -1,0 +1,46 @@
+:host {
+	background-color: slateblue;
+	color: white;
+	padding: 1em 0em;
+	display: grid;
+	grid-template:
+		'. title account  .' 2fr
+		'. links search  .' 1fr/
+		1fr 4fr 3fr 1fr;
+	gap: 1em;
+	
+}
+
+:host > div.title {
+	font-size: x-large;
+	grid-area: title;
+	padding: 0.5em 0em;
+}
+
+:host > div.account {
+	font-size: x-large;
+	grid-area: account;
+	justify-self: end;
+	padding: 0.5em 0em;
+}
+
+:host > div.links {
+	font-size: large;
+	grid-area: links;
+}
+
+:host > div.search {
+	font-size: large;
+	grid-area: search;
+	justify-self: end;
+}
+
+:host a {
+	padding: 0.5em;
+	color: white;
+	text-decoration: none;
+}
+
+:host a:hover {
+	background-color: #3b2e94;
+}

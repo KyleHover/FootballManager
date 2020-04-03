@@ -1,35 +1,22 @@
-<div class='mx-auto'>
-  <h1 class='text-center'>Fantasy Football App</h1>
+<div class='login-container'>
+  <h2>Login Information</h2>
 
-  <div class='card login mx-auto'>
-    <div class='mx-auto px-2 py-2 w-75'>
-      <h2 class='text-center'>Login Information</h2>
+  <form #form='ngForm' (ngSubmit)='submitLogin(form.value)'>
+    <p>Email Address</p>
+    <input type='email' name='email' ngModel class='form-control' id='inputEmail' aria-describedby='emailHelp'>
 
-      <form #form='ngForm' (ngSubmit)='submitLogin(form.value)'>
-        <div class='form-group'>
-          <label for='inputEmail'>Email Address</label>
-          <input type='email' name='email' ngModel class='form-control' id='inputEmail' aria-describedby='emailHelp'>
-        </div>
+    <p>Password</p>
+    <input type='password' name='password' ngModel class='form-control' id='inputPassword'>
 
-        <div class='form-group'>
-          <label for='inputPassword'>Password</label>
-          <input type='password' name='password' ngModel class='form-control' id='inputPassword'>
-        </div>
+    <label>
+      <input class="rememberCheck" type='checkbox' name='remember' ngModel class='form-check-input' id='rememberCheck'>
+      <p>Remember Me</p>
+    </label>
 
-        <div class='form-group form-check'>
-          <input type='checkbox' name='remember' ngModel class='form-check-input' id='rememberCheck'>
-          <label class='form-check-label' for='rememberCheck'>Remember me</label>
-        </div>
+    <button type='submit' class='btn btn-primary submit'>Login</button>
 
-        <div class='text-center'>
-          <button type='submit' class='btn btn-primary submit'>Login</button>
-        </div>
+  </form>
 
-      </form>
-
-      <p><a href='#'>Create an account</a></p>
-      <p><a href='#'>Forgot password</a></p>
-      
-    </div>
-  </div>
+  <p><a href='#'>Create an account</a></p>
+  <p><a href='#'>Forgot password</a></p>
 </div>
