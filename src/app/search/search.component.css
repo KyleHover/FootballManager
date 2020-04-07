@@ -1,0 +1,13 @@
+:host {
+	grid-area: contents;
+	padding: 0em 1em;
+}
+
+button.btn-search {
+	display: block;
+	width: 100%;
+	border-radius: 8px;
+	color: white;
+	background-color: slateblue;
+	border-color: #4b3abb;
+}

@@ -11,6 +11,8 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
+import { FantasyTeamScoringComponent } from './fantasy-team-scoring/fantasy-team-scoring.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { SearchComponent } from './search/search.component';
     HeaderComponent,
     LoginComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    FantasyTeamScoringComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,

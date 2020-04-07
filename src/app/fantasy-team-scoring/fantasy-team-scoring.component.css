@@ -1,0 +1,28 @@
+:host {
+	grid-area: contents;
+	padding: 0em 1em;
+}
+
+label span {
+	margin-left: 1em;
+}
+
+form div {
+	display: grid;
+	row-gap: 1em;
+	column-gap: 16em;
+}
+
+div.team-stats {
+	grid-auto-flow: column;
+}
+
+button.btn-save-changes {
+	font-size: x-large;
+	display: block;
+	width: 100%;
+	border-radius: 8px;
+	color: white;
+	background-color: slateblue;
+	border-color: #4b3abb;
+}

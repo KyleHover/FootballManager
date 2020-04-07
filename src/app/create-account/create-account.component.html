@@ -1,0 +1,24 @@
+<div class='create-account-container'>
+	<h2>New Account Information</h2>
+
+	<form #form='ngForm' (ngSubmit)='submitNewAccount(form.value)'>
+		<label>
+			Email Address
+			<input type='email' name='email' ngModel id='inputEmail'>
+		</label>
+
+		<label>
+			Password
+			<input type='password' name='password' ngModel id='inputPassword'>
+		</label>
+
+		<label>
+			Confirm Password
+			<input type='password' name='confirmPassword' ngModel id='inputPassword'>
+		</label>
+
+		<button type='submit' class='btn-new-account'>Create Account</button>
+
+	</form>
+
+</div>

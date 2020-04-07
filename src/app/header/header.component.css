@@ -44,3 +44,10 @@
 :host a:hover {
 	background-color: #3b2e94;
 }
+
+button.btn-search {
+	border-radius: 8px;
+	color: white;
+	background-color: slateblue;
+	border-color: #4b3abb;
+}

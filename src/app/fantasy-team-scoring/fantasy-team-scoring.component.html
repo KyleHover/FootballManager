@@ -1,0 +1,183 @@
+<div class='fantasy-team-scoring-container'>
+	<h2>Fantasy Team Scoring Rules</h2>
+	<form #form='ngForm' (ngSubmit)='updateScoringRules(form.value)'>
+		<div class='team-stats'>
+			<div class='offensive-stats'>
+				<h4>Offensive Points:</h4>
+				<div class='regular-points'>
+					<label for='rushing-receiving-td'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["rushing-receiving-td"]'
+							name='rushing-receiving-td' ngModel id='rushing-receiving-td'>
+						<span>Rushing/Receiving Touchdown</span>
+					</label>
+
+					<label for='kick-punt-return-td'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["kick-punt-return-td"]' name='kick-punt-return-td'
+							ngModel id='kick-punt-return-td'>
+						<span>Kick/Punt Return Touchdown</span>
+					</label>
+
+					<label for='return-recover-fb-td'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["return-recover-fb-td"]'
+							name='return-recover-fb-td' ngModel id='return-recover-fb-td'>
+						<span>Return/Recover Fumble Touchdown</span>
+					</label>
+
+					<label for='passing-td'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["passing-td"]' name='passing-td' ngModel
+							id='passing-td'>
+						<span>Passing Touchdown</span>
+					</label>
+
+					<label for='rushing-receiving-2-pt-conversion'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["rushing-receiving-2-pt-conversion"]'
+							name='rushing-receiving-2-pt-conversion' ngModel id='rushing-receiving-2-pt-conversion'>
+						<span>Rushing/Receiving 2-pt Conversion</span>
+					</label>
+
+					<label for='passing-2-pt-conversion'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["passing-2-pt-conversion"]'
+							name='passing-2-pt-conversion' ngModel id='passing-2-pt-conversion'>
+						<span>Passing 2-pt Conversion</span>
+					</label>
+
+					<label for='rushing-receiving-10-yds'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["rushing-receiving-10-yds"]'
+							name='rushing-receiving-10-yds' ngModel id='rushing-receiving-10-yds'>
+						<span>Rushing/Receiving 10 Yards</span>
+					</label>
+
+					<label for='passing-25-yds'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["passing-25-yds"]' name='passing-25-yds' ngModel
+							id='passing-25-yds'>
+						<span>Passing 25 Yards</span>
+					</label>
+				</div>
+
+				<h4>Offensive Bonus Points:</h4>
+				<div class='bonus-points'>
+					<label for='rushing-receiving-40-yds-plus'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["rushing-receiving-40-yds-plus"]'
+							name='rushing-receiving-40-yds-plus' ngModel id='rushing-receiving-40-yds-plus'>
+						<span>Rushing/Receiving 40 Yards+</span>
+					</label>
+
+					<label for='passing-td-40-yds-plus'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["passing-td-40-yds-plus"]'
+							name='passing-td-40-yds-plus' ngModel id='passing-td-40-yds-plus'>
+						<span>Passing Touchdown 40 Yards+</span>
+					</label>
+				</div>
+
+				<h4>Offensive Penalty Points:</h4>
+				<div class='penalty-points'>
+
+					<label for='intercepted-pass'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["intercepted-pass"]' name='intercepted-pass'
+							ngModel id='intercepted-pass'>
+						<span>Intercepted Pass</span>
+					</label>
+
+					<label for='fumble-lost'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fumble-lost"]' name='fumble-lost' ngModel
+							id='fumble-lost'>
+						<span>Fumble Lost</span>
+					</label>
+
+				</div>
+			</div>
+
+			<div class='kickers-defensive-special-teams-stats'>
+				<h4>Kickers Points:</h4>
+				<div class='kickers-points'>
+					<label for='fg-50-yds-plus'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fg-50-yds-plus"]' name='fg-50-yds-plus' ngModel
+							id='fg-50-yds-plus'>
+						<span>50+ Yard Field Goal Made</span>
+					</label>
+
+					<label for='fg-40-49-yds'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fg-40-49-yds"]' name='fg-40-49-yds' ngModel
+							id='fg-40-49-yds'>
+						<span>40-49 Yard Field Goal Made</span>
+					</label>
+
+					<label for='fg-39-less-yds'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fg-39-less-yds"]' name='fg-39-less-yds' ngModel
+							id='fg-39-less-yds'>
+						<span>39 Yard or Less Field Goal Made</span>
+					</label>
+
+					<label for='rushing-passing-receiving-2-pt-conversion'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["rushing-passing-receiving-2-pt-conversion"]'
+							placeholder='6' name='rushing-passing-receiving-2-pt-conversion' ngModel
+							id='rushing-passing-receiving-2-pt-conversion'>
+						<span>Rushing/Passing/Receiving 2 Point Conversion</span>
+					</label>
+
+					<label for='extra-point-made'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["extra-point-made"]' name='extra-point-made'
+							ngModel id='extra-point-made'>
+						<span>Extra Point Made</span>
+					</label>
+				</div>
+
+				<h4>Kickers Penalty Points:</h4>
+				<div class='kickers-penalty-points'>
+					<label for='fg-39-less-yds-missed'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fg-39-less-yds-missed"]'
+							name='fg-39-less-yds-missed' ngModel id='fg-39-less-yds-missed'>
+						<span>39 Yard or Less Field Goal Missed</span>
+					</label>
+
+					<label for='fg-40-49-yds-missed'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fg-40-49-yds-missed"]' name='fg-40-49-yds-missed'
+							ngModel id='fg-40-49-yds-missed'>
+						<span>40-49 Yard Field Goal Missed</span>
+					</label>
+				</div>
+
+				<h4>Defensive/Special Teams Points:</h4>
+				<div class='defensive-special-teams-stats'>
+					<label for='defense-special-teams-td'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["defense-special-teams-td"]'
+							name='defense-special-teams-td' ngModel id='defense-special-teams-td'>
+						<span>Defensive/Special Teams Touchdown</span>
+					</label>
+
+					<label for='interception'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["interception"]' name='interception' ngModel
+							id='interception'>
+						<span>Interception</span>
+					</label>
+
+					<label for='fumble-recovery'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["fumble-recovery"]' name='fumble-recovery' ngModel
+							id='fumble-recovery'>
+						<span>Fumble Recovery</span>
+					</label>
+
+					<label for='blocked-punt-pat-fg'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["blocked-punt-pat-fg"]' name='blocked-punt-pat-fg'
+							ngModel id='blocked-punt-pat-fg'>
+						<span>Blocked Punt, PAT, or FG</span>
+					</label>
+
+					<label for='safety'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["safety"]' name='safety' ngModel id='safety'>
+						<span>Safety</span>
+					</label>
+
+					<label for='sack'>
+						<input type='number' size='3' [(ngModel)]='defaultValues["sack"]' name='sack' ngModel id='sack'>
+						<span>Sack</span>
+					</label>
+
+				</div>
+			</div>
+		</div>
+
+		<button type='submit' class='btn-save-changes'>Save Changes</button>
+	</form>
+
+</div>

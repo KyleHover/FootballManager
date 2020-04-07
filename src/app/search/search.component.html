@@ -1,54 +1,42 @@
-<div class='mx-auto'>
-  <h1 class='text-center'>Fantasy Football App</h1>
+<div class='search-container'>
+	<h2 class='text-center'>Game Search</h2>
 
-  <div class='mx-auto px-2 py-2 w-75'>
-    <h2 class='text-center'>Game Search</h2>
+	<form #form='ngForm' (ngSubmit)='submitQuery(form.value)'>
+		<label for='inputDate'>Date</label>
+		<input type='date' name='date' ngModel class='form-control' id='inputDate' aria-describedby='inputDate'>
 
-    <form #form='ngForm' (ngSubmit)='submitQuery(form.value)'>
-      <div class='form-group'>
-        <label for='inputDate'>Date</label>
-        <input type='date' name='date' ngModel class='form-control' id='inputDate' aria-describedby='inputDate'>
-      </div>
+		<label for='inputTeam1'>Team 1</label>
+		<select ngModel name='Team1'>
+			<option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
+		</select>
 
-      <div class='form-group'>
-        <label for='inputTeam1'>Team 1</label>
-        <select ngModel name='Team1'>
-          <option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
-        </select>
-      </div>
+		<label for='inputTeam2'>Team 2</label>
+		<select ngModel name='Team2'>
+			<option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
+		</select>
 
-      <div class='form-group'>
-        <label for='inputTeam2'>Team 2</label>
-        <select ngModel name='Team2'>
-          <option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
-        </select>
-      </div>
+		<button type='submit' class='btn-search'>Search</button>
 
-      <div class='text-center'>
-        <button type='submit' class='btn btn-primary submit'>Search</button>
-      </div>
-
-    </form>
-  </div>
+	</form>
 </div>
 
 
 <div *ngIf="games | async; let games; else loading">
-  <div *ngFor="let game of games">
-    <p>Game ID: {{ game.Gameid }}</p>
-    <p>Team: {{ game.Team }}</p>
-    <p>Opponent: {{ game.Opponent }}</p>
-    <p>Turnovers: {{ game.Turnovers }}</p>
-    <p>Total Yards: {{ game.TotalYards }}</p>
-    <p>Passing Yards: {{ game.PassingYards }}</p>
-    <p>Running Yards: {{ game.RunningYards }}</p>
-    <p>Penalty Yards: {{ game.PenaltyYards }}</p>
-    <p>Punts: {{ game.punts}}</p>
-    <p>Punt Average: {{ game.PuntAverage }}</p>
-    <p>Punt Yards: {{ game.PuntYards}}</p>
-    <p>Penalties: {{ game.Penalties }}</p>
-    <p>Total First Downs: {{ game.totfd }}</p>
-    <br>
-  </div>
-  <div *ngIf="games.length === 0">No results</div>
+	<div *ngFor="let game of games">
+		<p>Game ID: {{ game.Gameid }}</p>
+		<p>Team: {{ game.Team }}</p>
+		<p>Opponent: {{ game.Opponent }}</p>
+		<p>Turnovers: {{ game.Turnovers }}</p>
+		<p>Total Yards: {{ game.TotalYards }}</p>
+		<p>Passing Yards: {{ game.PassingYards }}</p>
+		<p>Running Yards: {{ game.RunningYards }}</p>
+		<p>Penalty Yards: {{ game.PenaltyYards }}</p>
+		<p>Punts: {{ game.punts}}</p>
+		<p>Punt Average: {{ game.PuntAverage }}</p>
+		<p>Punt Yards: {{ game.PuntYards}}</p>
+		<p>Penalties: {{ game.Penalties }}</p>
+		<p>Total First Downs: {{ game.totfd }}</p>
+		<br>
+	</div>
+	<div *ngIf="games.length === 0">No results</div>
 </div>
