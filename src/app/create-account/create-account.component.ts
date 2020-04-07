@@ -10,6 +10,10 @@ export class CreateAccountComponent implements OnInit {
   constructor() { }
 
   submitNewAccount(value: any) {
+    firebase.auth()createUserWithEmailAndPassword(email, password).catch(function(error){
+      var errorCode = error.code;
+      var errormessage = error.message;
+    })
     console.log(value);
   }
 
