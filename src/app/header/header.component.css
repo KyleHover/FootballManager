@@ -51,3 +51,14 @@ button.btn-search {
 	background-color: slateblue;
 	border-color: #4b3abb;
 }
+
+button.logout {
+	padding: 0.5em;
+	color: white;
+	background-color: slateblue;
+	border: 0;
+}
+
+button.logout:hover {
+	background-color: #3b2e94;
+}

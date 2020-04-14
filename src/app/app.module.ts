@@ -13,6 +13,8 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { FantasyTeamScoringComponent } from './fantasy-team-scoring/fantasy-team-scoring.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { AuthService } from './auth/auth.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,10 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
