@@ -15,6 +15,10 @@ import { FantasyTeamScoringComponent } from './fantasy-team-scoring/fantasy-team
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { AuthService } from './auth/auth.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AnalysisComponent } from './analysis/analysis.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     FooterComponent,
     SearchComponent,
     FantasyTeamScoringComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

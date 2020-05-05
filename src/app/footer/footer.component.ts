@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 	styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-	about: string =
-		'Fantasy Manager provides users access to advanced metrics and analysis to help improve their fantasy team.';
+	about: string = 'Fantasy Manager provides users access to advanced metrics and analysis to help improve their fantasy team.';
 
 	aboutLink: string = '#';
 	helpLink: string = '#';

@@ -2,10 +2,15 @@
   <a href='./'>Football Manager</a>
 </div>
 <div class='account'>
-  <!-- <a href='./login'>My Account</a> -->
-  <a class='create-account' href='./create-account'>Create Account</a>
-	<a class='login' href='./login'>Login</a>
-	<button class='logout' (click)='logout()'>Logout</button>
+	<div *ngIf="isLoggedIn; then loggedIn else loggedOut"></div>
+	<ng-template #loggedIn>
+		<a href='./login'>My Account</a>
+		<button class='logout' (click)='logout()'>Logout</button>
+	</ng-template>
+	<ng-template #loggedOut>
+		<a class='create-account' href='./create-account'>Create Account</a>
+		<a class='login' href='./login'>Login</a>
+	</ng-template>
 </div>
 <div class='links'>
   <a href='./search'>Search</a>
