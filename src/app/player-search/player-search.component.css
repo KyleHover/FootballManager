@@ -1,29 +1,17 @@
 :host {
 	grid-area: contents;
+	grid-template-columns: minmax(100%, 100%);
+	display: grid;
+	justify-items: center;
 	padding: 0em 1em;
 	width: 90%;
+	overflow-x: auto;
 }
 
-div.search-container {
+div.search-container,
+div.player-search-results,
+div.player-season-stats-results {
 	width: 100%;
-}
-
-form.game-search {
-	display: grid;
-	row-gap: 0.5em;
-}
-
-div.game-search-options {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 1em;
-}
-
-div.game-search-options > label {
-	display: grid;
-	grid-template:
-	'name value'/
-	1fr 2fr;
 }
 
 button.btn-search,
@@ -38,11 +26,28 @@ button.btn-clear-search-results {
 }
 
 table {
-	table-layout: auto;
+	table-layout: fixed;
 	border-collapse: collapse;
 	width: 100%;
 	border: solid slateblue;
 	padding-bottom: 1em;
+}
+
+table.player-season-stats-table {
+	table-layout: auto;
+}
+
+.season-stats-categories th {
+	text-align: center;
+}
+
+table.player-season-stats-table td {
+	text-align: right;
+}
+
+div.overflow-container {
+	overflow-x: auto;
+	max-width: 100%;
 }
 
 thead {

@@ -1,0 +1,143 @@
+<div class="search-container">
+	<h2>Player Search</h2>
+
+	<form class="player-name-search" #form="ngForm" (ngSubmit)="submitPlayerNameQuery()">
+		<div class="player-name-search-options">
+			<label for="playerName">
+				<p>Player Name</p>
+				<input type="text" [(ngModel)]="playerNameQueryOptions.playerName" id="playerName" name="playerName" />
+			</label>
+
+			<label for="playerId">
+				<p>Player ID</p>
+				<input type="text" [(ngModel)]="playerNameQueryOptions.playerId" id="playerId" name="playerId" />
+			</label>
+
+			<button type="submit" class="btn-search">Search</button>
+			<button type="button" class="btn-reset-search" (click)="resetPlayerFields()">Reset Search</button>
+		</div>
+	</form>
+</div>
+
+<!-- <div class="player-search-results" *ngIf="playersFromName | async; let playersFromName; else: loading"> -->
+<div class="player-search-results" *ngIf="canDisplayPlayerSearchTable">
+	<h3>Results</h3>
+	<table *ngIf="canDisplayPlayerSearchTable" class="players-data">
+		<thead>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Last Game</th>
+			<th>Last Team</th>
+			<th>Look Up by Season</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let player of playersFromName">
+				<td #id>{{ player.playerId }}</td>
+				<td>{{ player.playerName }}</td>
+				<td>{{ player.lastGameId }}</td>
+				<td>{{ player.lastTeamAbbreviation }}</td>
+				<td>
+					<select #seasonSelection>
+						<option [value]="null">Select a Season</option>
+						<option *ngFor="let season of seasons; index as idx" [value]="season">
+							{{ season.Name }}
+						</option>
+					</select>
+				</td>
+				<td>
+					<button type="submit" class="btn-search" (click)="submitPlayerSeasonQuery(id.innerText, seasonSelection)">Get Stats</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- <div *ngIf="playersFromName.length === 0">No results</div> -->
+	<button type="button" class="btn-clear-search-results" (click)="clearPlayerSearchResults()">Clear Search Results</button>
+</div>
+
+<div class="player-season-stats-results" *ngIf="canDisplayPlayerSeasonStatsTable">
+	<h3>Season Statistics</h3>
+	<div class="overflow-container">
+		<table class="player-season-stats-table" *ngIf="canDisplayPlayerSeasonStatsTable">
+			<thead>
+				<tr class="season-stats-categories">
+					<th rowspan="2">Game ID</th>
+					<th rowspan="2">Team</th>
+					<th colspan="7">Passing Stats</th>
+					<th colspan="7">Receiving Stats</th>
+					<th colspan="7">Rushing Stats</th>
+					<th colspan="5">Fumble Stats</th>
+				</tr>
+				<tr>
+					<!-- passing -->
+					<th>Total Yards</th>
+					<th>Touchdowns</th>
+					<th>Interceptions</th>
+					<th>Attempts</th>
+					<th>Completions</th>
+					<th>Two Point Conversions</th>
+					<th>Two Point Attempts</th>
+					<!-- receiving -->
+					<th>Total Yards</th>
+					<th>Touchdowns</th>
+					<th>Receptions</th>
+					<th>Longest Reception</th>
+					<th>Longest Touchdown</th>
+					<th>Two Point Attempts</th>
+					<th>Two Point Conversions</th>
+					<!-- rushing -->
+					<th>Total Yards</th>
+					<th>Touchdowns</th>
+					<th>Attempts</th>
+					<th>Longest Rush</th>
+					<th>Longest Touchdown</th>
+					<th>Two Point Attempts</th>
+					<th>Two Point Conversions</th>
+					<!-- fumbles -->
+					<th>Total Fumbles</th>
+					<th>Lost Fumbles</th>
+					<th>Recovered</th>
+					<th>Team Recovered</th>
+					<th>Yards</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let game of playerSeasonStats">
+					<td>{{ game.gameId }}</td>
+					<td>{{ game.team }}</td>
+					<!-- passing -->
+					<td>{{ game.playerStats.passing?.yards || '' }}</td>
+					<td>{{ game.playerStats.passing?.touchdowns || '' }}</td>
+					<td>{{ game.playerStats.passing?.interceptions || '' }}</td>
+					<td>{{ game.playerStats.passing?.attempts || '' }}</td>
+					<td>{{ game.playerStats.passing?.completions || '' }}</td>
+					<td>{{ game.playerStats.passing?.two_point_makes || '' }}</td>
+					<td>{{ game.playerStats.passing?.two_point_conversions || '' }}</td>
+					<!-- receiving -->
+					<td>{{ game.playerStats.receiving?.yards || '' }}</td>
+					<td>{{ game.playerStats.receiving?.touchdowns || '' }}</td>
+					<td>{{ game.playerStats.receiving?.receptions || '' }}</td>
+					<td>{{ game.playerStats.receiving?.long || '' }}</td>
+					<td>{{ game.playerStats.receiving?.long_touchdown || '' }}</td>
+					<td>{{ game.playerStats.receiving?.two_point_makes || '' }}</td>
+					<td>{{ game.playerStats.receiving?.two_point_conversions || '' }}</td>
+					<!-- rushing -->
+					<td>{{ game.playerStats.rushing?.yards || '' }}</td>
+					<td>{{ game.playerStats.rushing?.touchdowns || '' }}</td>
+					<td>{{ game.playerStats.rushing?.attempts || '' }}</td>
+					<td>{{ game.playerStats.rushing?.long || '' }}</td>
+					<td>{{ game.playerStats.rushing?.long_touchdown || '' }}</td>
+					<td>{{ game.playerStats.rushing?.two_point_makes || '' }}</td>
+					<td>{{ game.playerStats.rushing?.two_point_conversions || '' }}</td>
+					<!-- fumbles -->
+					<td>{{ game.playerStats.fumbles?.total_fumbles || '' }}</td>
+					<td>{{ game.playerStats.fumbles?.fumbles_lost || '' }}</td>
+					<td>{{ game.playerStats.fumbles?.recovered || '' }}</td>
+					<td>{{ game.playerStats.fumbles?.team_recovered || '' }}</td>
+					<td>{{ game.playerStats.fumbles?.yards || '' }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<button type="button" class="btn-clear-search-results" (click)="clearPlayerSeasonResults()">Clear Season Results</button>
+</div>

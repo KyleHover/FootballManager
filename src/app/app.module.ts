@@ -19,30 +19,35 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { MyTeamComponent } from './my-team/my-team.component';
+import { FirestoreService } from './firestore-service/firestore.service';
+import { PlayerSearchComponent } from './player-search/player-search.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    LoginComponent,
-    FooterComponent,
-    SearchComponent,
-    FantasyTeamScoringComponent,
-    CreateAccountComponent,
-    AnalysisComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    NgxChartsModule,
-    BrowserAnimationsModule
-  ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		LoginComponent,
+		FooterComponent,
+		SearchComponent,
+		FantasyTeamScoringComponent,
+		CreateAccountComponent,
+		AnalysisComponent,
+		MyTeamComponent,
+		PlayerSearchComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule,
+		AngularFireDatabaseModule,
+		AngularFireAuthModule,
+		NgxChartsModule,
+		BrowserAnimationsModule,
+	],
+	providers: [AuthService],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,56 @@
+<div class="my-team-container">
+	<h2>My Team</h2>
+	<div class="my-team">
+		<button class="{{ player.id }}" (click)="viewPlayer($event)" *ngFor="let player of savedPlayers">
+			<img class="{{ player.id }}" src="./assets/default.png" width="100" />
+			<p class="{{ player.id }}">{{ player.name }}</p>
+			<form #form="ngForm" (ngSubmit)="saveChanges(form.value)">
+				<input name="oldPlayerId" [(ngModel)]="player.id" style="display: none;" />
+				<select ngModel name="newPlayer">
+					<option [ngValue]="playerNew" *ngFor="let playerNew of players">
+						{{ playerNew.name }}
+					</option>
+				</select>
+				<button type="submit" class="btn-save">Save</button>
+			</form>
+		</button>
+	</div>
+	<div class="player-view">
+		<div class="player"></div>
+	</div>
+	<button (click)="editTeam()">Edit</button>
+	<!-- <form #form='ngForm' (ngSubmit)='updateMyTeam(form.value)'>
+		<table>
+			<thead>
+				<th>Player</th>
+				<th>Passing Attempts</th>
+				<th>Completions</th>
+				<th>Interceptions</th>
+				<th>Passing Touchdowns</th>
+				<th>Passing Two Point Attempts</th>
+				<th>Passing Two Point Makes</th>
+				<th>Passing Yards</th> -->
+	<!-- <th>Rushing Attemps</th>
+			<th>Long Rushes</th>
+			<th>Long Touchdowns</th>
+			<th>Rushing Touchdowns</th>
+			<th>Rushing Two Point Attempts</th>
+			<th>Rushing Two Point Makes</th>
+			<th>Rushing Yards</th> -->
+	<!-- </thead>
+			<tbody id='table'>
+				<tr *ngFor='let player of savedPlayers; index as idx' id='{{ player.name + "-" + idx }}' class='player-row'>
+					<td class='player-name'>{{ player.name }}</td>
+					<td class='passing-attemps'>{{ player.passing.attempts }}</td>
+					<td class='passing-completions'>{{ player.passing.completions }}</td>
+					<td class='passing-interceptions'>{{ player.passing.interceptions }}</td>
+					<td class='passing-touchdowns'>{{ player.passing.touchdowns }}</td>
+					<td class='passing-two-point-attempts'>{{ player.passing.two_point_attempts }}</td>
+					<td class='passing-two-point-makes'>{{ player.passing.two_point_makes }}</td>
+					<td class='passing-yards'>{{ player.passing.yards }}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</form> -->
+</div>

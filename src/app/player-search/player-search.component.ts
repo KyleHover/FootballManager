@@ -1,25 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import {
+	FirestoreService,
+	PlayerQueryOptions,
+	PlayerNameQueryOptions,
+	GameQueryOptions,
+	PlayerSeasonStatsQueryOptions,
+} from '../firestore-service/firestore.service';
 import { Observable } from 'rxjs';
-import { FirestoreService, GameQueryOptions, PlayerQueryOptions, PlayerNameQueryOptions } from '../firestore-service/firestore.service';
 
 @Component({
-	selector: 'app-search',
-	templateUrl: './search.component.html',
-	styleUrls: ['./search.component.css'],
+	selector: 'app-player-search',
+	templateUrl: './player-search.component.html',
+	styleUrls: ['./player-search.component.css'],
 })
-export class SearchComponent implements OnInit {
-	games: Observable<GameQueryOptions[]>;
+export class PlayerSearchComponent implements OnInit {
 	database: FirestoreService;
+	players: Observable<PlayerQueryOptions[]>;
+	playerSeasonStats: PlayerQueryOptions[] = [];
+	playersFromName: PlayerNameQueryOptions[] = [];
 	teams: Team[];
-
+	seasons: Season[];
 	gameQueryOptions: GameQueryOptions;
 	playerQueryOptions: PlayerQueryOptions;
 	playerNameQueryOptions: PlayerNameQueryOptions;
-	dateGame: string;
+	playerSeasonStatsQueryOptions: PlayerSeasonStatsQueryOptions;
+	canDisplayPlayerSearchTable: boolean;
+	canDisplayPlayerSeasonStatsTable: boolean;
+
 	datePlayer: string;
 	constructor(firestoreService: FirestoreService) {
+		this.canDisplayPlayerSearchTable = false;
+		this.canDisplayPlayerSeasonStatsTable = false;
 		this.teams = teams;
 		this.database = firestoreService;
+		this.seasons = this.generateSeasons();
 		this.gameQueryOptions = {
 			Gameid: null,
 			Opponent: null,
@@ -45,6 +59,12 @@ export class SearchComponent implements OnInit {
 		this.playerNameQueryOptions = {
 			playerId: null,
 			playerName: null,
+			lastGameId: null,
+			lastTeamAbbreviation: null,
+		};
+		this.playerSeasonStatsQueryOptions = {
+			playerId: null,
+			season: null,
 		};
 	}
 
@@ -61,73 +81,74 @@ export class SearchComponent implements OnInit {
 		return seasons;
 	}
 
-	updateGameDate(date) {
-		if (date) {
-			this.gameQueryOptions.Gameid = +date.replace('-', '').replace('-', '') * 100;
-		} else {
-			this.gameQueryOptions.Gameid = null;
-		}
-	}
-
-	updatePlayerDate(date) {
-		if (date) {
-			this.playerQueryOptions.gameId = +date.replace('-', '').replace('-', '') * 100;
-		} else {
-			this.playerQueryOptions.gameId = null;
-		}
-	}
-
-	resetGameFields() {
-		this.gameQueryOptions = {
-			Gameid: null,
-			Opponent: null,
-			PassingYards: null,
-			Penalties: null,
-			PenaltyYards: null,
-			PuntAverage: null,
-			PuntYards: null,
-			RunningYards: null,
-			Team: null,
-			TotalYards: null,
-			Turnovers: null,
-			punts: null,
-			totfd: null,
-		};
-		this.dateGame = '';
-	}
-
 	resetPlayerFields() {
-		this.playerQueryOptions = {
-			gameId: null,
+		this.playerNameQueryOptions = {
 			playerId: null,
 			playerName: null,
-			team: null,
-			playerStats: null,
+			lastGameId: null,
+			lastTeamAbbreviation: null,
 		};
-		this.datePlayer = '';
+		this.playersFromName = [];
+		this.playerSeasonStats = [];
+		this.canDisplayPlayerSearchTable = false;
+		this.canDisplayPlayerSeasonStatsTable = false;
 	}
 
-	clearGameSearchResults() {
-		try {
-			let resultsTable: HTMLDivElement = document.querySelector('div.game-search-results');
-			resultsTable.style.display = 'none';
-		} catch (err) {}
-	}
-
-	submitGameQuery() {
+	submitPlayerNameQuery() {
+		this.playersFromName = [];
+		this.playerSeasonStats = [];
+		this.canDisplayPlayerSeasonStatsTable = false;
 		let performQuery: boolean = false;
-		Object.values(this.gameQueryOptions).forEach((queryOption) => {
+		Object.values(this.playerNameQueryOptions).forEach((queryOption) => {
 			if (queryOption != null) {
 				performQuery = true;
 			}
 		});
 		if (performQuery) {
-			this.games = this.database.GetGameStats(this.gameQueryOptions);
+			this.database.GetPlayerFromName(this.playerNameQueryOptions).forEach((players) => {
+				players.forEach((player) => {
+					let playerData: PlayerQueryOptions = {};
+					this.database.GetPlayersLastGameInfo(player).forEach((x) => {
+						playerData = x[0];
+						player.lastGameId = playerData.gameId;
+						player.lastTeamAbbreviation = playerData.team;
+						this.playersFromName.push(player);
+						this.canDisplayPlayerSearchTable = true;
+					});
+				});
+			});
 		}
-		try {
-			let resultsTable: HTMLDivElement = document.querySelector('div.game-search-results');
-			resultsTable.style.display = 'block';
-		} catch (err) {}
+	}
+
+	clearPlayerSearchResults() {
+		this.playersFromName = [];
+		this.playerSeasonStats = [];
+		this.canDisplayPlayerSearchTable = false;
+		this.canDisplayPlayerSeasonStatsTable = false;
+	}
+
+	clearPlayerSeasonResults() {
+		this.playerSeasonStats = [];
+		this.canDisplayPlayerSeasonStatsTable = false;
+	}
+
+	submitPlayerSeasonQuery(playerId: string, season: HTMLSelectElement) {
+		if (season.selectedIndex - 1 === -1) {
+			return;
+		}
+		this.playerSeasonStats = [];
+		let selectedSeason: Season = this.seasons[season.selectedIndex - 1];
+		this.playerSeasonStatsQueryOptions = {
+			playerId: playerId,
+			season: selectedSeason,
+		};
+		this.database.GetPlayerSeasonStats(this.playerSeasonStatsQueryOptions).forEach((season) => {
+			season.forEach((game) => {
+				this.playerSeasonStats.push(game);
+			});
+			console.log(this.playerSeasonStats);
+			this.canDisplayPlayerSeasonStatsTable = true;
+		});
 	}
 
 	ngOnInit() {}

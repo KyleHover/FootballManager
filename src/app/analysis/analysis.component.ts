@@ -95,10 +95,12 @@ export class AnalysisComponent implements OnInit {
 
   items: Observable<any>;
 	constructor(db: AngularFireDatabase) {
-    this.items = db.object('football-manager-824d3/Players/2009081750').valueChanges();
+		this.items = db.object('football-manager-824d3/Players/2009081750').valueChanges();
   }
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log(this.items);
+	}
 
 	onSelect(data: any): void {
 		console.log('Item clicked', JSON.parse(JSON.stringify(data)));

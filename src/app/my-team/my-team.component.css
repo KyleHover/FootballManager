@@ -1,0 +1,37 @@
+:host {
+	grid-area: contents;
+	padding: 0em 1em;
+	width: 100%;
+}
+
+div.my-team-container {
+	display: grid;
+	grid-template:
+	'title'
+	'team'
+	'player';
+	justify-content: center;
+	min-width: 100%;
+	row-gap: 2em;
+}
+
+h2 {
+	grid-area: title;
+}
+
+div.my-team {
+	grid-area: team;
+	display: grid;
+	grid-template-columns: repeat(4, 128px);
+	gap: 2em;
+	justify-self: center;
+	justify-content: center;
+}
+
+div.my-team > button > form {
+	display: none;
+}
+
+div.player-view div.player {
+	grid-area: player;
+}

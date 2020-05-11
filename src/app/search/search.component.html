@@ -1,42 +1,121 @@
-<div class='search-container'>
-	<h2 class='text-center'>Game Search</h2>
+<div class="search-container">
+	<h2>Game Search</h2>
 
-	<form #form='ngForm' (ngSubmit)='submitQuery(form.value)'>
-		<label for='inputDate'>Date</label>
-		<input type='date' name='date' ngModel class='form-control' id='inputDate' aria-describedby='inputDate'>
+	<form class="game-search" #form="ngForm" (ngSubmit)="submitGameQuery()">
+		<div class="game-search-options">
+			<label for="date">
+				<p>Date</p>
+				<input type="date" [(ngModel)]="dateGame" (ngModelChange)="updateGameDate($event)" id="date" name="date" />
+			</label>
 
-		<label for='inputTeam1'>Team 1</label>
-		<select ngModel name='Team1'>
-			<option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
-		</select>
+			<label for="team">
+				<p>Team</p>
+				<select [(ngModel)]="gameQueryOptions.Team" id="team" name="team">
+					<option [ngValue]="null">Team 1</option>
+					<option *ngFor="let team of teams" [ngValue]="team.Abbreviation">{{ team.Name }}</option>
+				</select>
+			</label>
 
-		<label for='inputTeam2'>Team 2</label>
-		<select ngModel name='Team2'>
-			<option *ngFor='let team of teams' [ngValue]='team'>{{ team.Name }}</option>
-		</select>
+			<label for="opponent">
+				<p>Opponent</p>
+				<select [(ngModel)]="gameQueryOptions.Opponent" id="opponent" name="opponent">
+					<option [ngValue]="null">Team 2</option>
+					<option *ngFor="let team of teams" [ngValue]="team.Abbreviation">{{ team.Name }}</option>
+				</select>
+			</label>
 
-		<button type='submit' class='btn-search'>Search</button>
+			<label for="totalYards">
+				<p>Total Yards</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.TotalYards" id="totalYards" name="totalYards" />
+			</label>
 
+			<label for="passingYards">
+				<p>Passing Yards</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.PassingYards" id="passingYards" name="passingYards" />
+			</label>
+
+			<label for="runningYards">
+				<p>Rushing Yards</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.RunningYards" id="runningYards" name="runningYards" />
+			</label>
+
+			<label for="turnovers">
+				<p>Turnovers</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.Turnovers" id="turnovers" name="turnovers" />
+			</label>
+
+			<label for="penalties">
+				<p>Penalties</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.Penalites" id="penalties" name="penalties" />
+			</label>
+
+			<label for="penaltyYards">
+				<p>Penalty Yards</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.PenaltyYards" id="penaltyYards" name="penaltyYards" />
+			</label>
+
+			<label for="punts">
+				<p>Punts</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.punts" id="punts" name="punts" />
+			</label>
+
+			<label for="puntYards">
+				<p>Punt Yards</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.PuntYards" id="puntYards" name="puntYards" />
+			</label>
+
+			<label for="puntAverage">
+				<p>Average Punt Distance</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.PuntAverage" id="puntAverage" name="puntAverage" />
+			</label>
+
+			<label for="totfd">
+				<p>Total 1st Downs</p>
+				<input type="number" [(ngModel)]="gameQueryOptions.totfd" id="totfd" name="totfd" />
+			</label>
+		</div>
+
+		<button type="submit" class="btn-search">Search</button>
+		<button type="button" class="btn-reset-search" (click)="resetGameFields()">Reset Search</button>
 	</form>
 </div>
 
-
-<div *ngIf="games | async; let games; else loading">
-	<div *ngFor="let game of games">
-		<p>Game ID: {{ game.Gameid }}</p>
-		<p>Team: {{ game.Team }}</p>
-		<p>Opponent: {{ game.Opponent }}</p>
-		<p>Turnovers: {{ game.Turnovers }}</p>
-		<p>Total Yards: {{ game.TotalYards }}</p>
-		<p>Passing Yards: {{ game.PassingYards }}</p>
-		<p>Running Yards: {{ game.RunningYards }}</p>
-		<p>Penalty Yards: {{ game.PenaltyYards }}</p>
-		<p>Punts: {{ game.punts}}</p>
-		<p>Punt Average: {{ game.PuntAverage }}</p>
-		<p>Punt Yards: {{ game.PuntYards}}</p>
-		<p>Penalties: {{ game.Penalties }}</p>
-		<p>Total First Downs: {{ game.totfd }}</p>
-		<br>
-	</div>
+<div class="game-search-results" *ngIf="games | async; let games; else: loading">
+	<h3>Results</h3>
+	<table *ngIf="games.length != 0" class="games-data">
+		<thead>
+			<th>ID</th>
+			<th>Team</th>
+			<th>Opponent</th>
+			<th>Total Yards</th>
+			<th>Passing Yards</th>
+			<th>Rushing Yards</th>
+			<th>Turnovers</th>
+			<th>Penalties</th>
+			<th>Penalty Yards</th>
+			<th>Punts</th>
+			<th>Punt Yards</th>
+			<th>Average Punt Distance</th>
+			<th>Total 1st Downs</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let game of games">
+				<td>{{ game.Gameid }}</td>
+				<td>{{ game.Team }}</td>
+				<td>{{ game.Opponent }}</td>
+				<td class="text-align-right">{{ game.TotalYards }}</td>
+				<td class="text-align-right">{{ game.PassingYards }}</td>
+				<td class="text-align-right">{{ game.RunningYards }}</td>
+				<td class="text-align-right">{{ game.Turnovers }}</td>
+				<td class="text-align-right">{{ game.Penalties }}</td>
+				<td class="text-align-right">{{ game.PenaltyYards }}</td>
+				<td class="text-align-right">{{ game.punts }}</td>
+				<td class="text-align-right">{{ game.PuntYards }}</td>
+				<td class="text-align-right">{{ game.PuntAverage }}</td>
+				<td class="text-align-right">{{ game.totfd }}</td>
+			</tr>
+		</tbody>
+	</table>
 	<div *ngIf="games.length === 0">No results</div>
+	<button type="button" class="btn-clear-search-results" (click)="clearGameSearchResults()">Clear Search Results</button>
 </div>
